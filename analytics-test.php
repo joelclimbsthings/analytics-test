@@ -21,7 +21,7 @@ if ( ! defined( 'MAIN_PLUGIN_FILE' ) ) {
 
 require_once plugin_dir_path( __FILE__ ) . '/vendor/autoload_packages.php';
 
-use AnalyticsTest_2\Admin\Setup;
+use AnalyticsTest\Admin\Setup;
 
 // phpcs:disable WordPress.Files.FileName
 

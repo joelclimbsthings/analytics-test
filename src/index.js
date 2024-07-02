@@ -3,76 +3,203 @@
  */
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
-import { Dropdown } from '@wordpress/components';
-import * as Woo from '@woocommerce/components';
-import { Fragment } from '@wordpress/element';
+import { Chart } from '@woocommerce/components';
 
 /**
  * Internal dependencies
  */
 import './index.scss';
 
-const MyExamplePage = () => (
-	<Fragment>
-		<Woo.Section component="article">
-			<Woo.SectionHeader title={ __( 'Search', 'analytics-test' ) } />
-			<Woo.Search
-				type="products"
-				placeholder="Search for something"
-				selected={ [] }
-				onChange={ ( items ) => setInlineSelect( items ) }
-				inlineTags
-			/>
-		</Woo.Section>
-
-		<Woo.Section component="article">
-			<Woo.SectionHeader title={ __( 'Dropdown', 'analytics-test' ) } />
-			<Dropdown
-				renderToggle={ ( { isOpen, onToggle } ) => (
-					<Woo.DropdownButton
-						onClick={ onToggle }
-						isOpen={ isOpen }
-						labels={ [ 'Dropdown' ] }
-					/>
-				) }
-				renderContent={ () => <p>Dropdown content here</p> }
-			/>
-		</Woo.Section>
-
-		<Woo.Section component="article">
-			<Woo.SectionHeader
-				title={ __( 'Pill shaped container', 'analytics-test' ) }
-			/>
-			<Woo.Pill className={ 'pill' }>
-				{ __( 'Pill Shape Container', 'analytics-test' ) }
-			</Woo.Pill>
-		</Woo.Section>
-
-		<Woo.Section component="article">
-			<Woo.SectionHeader title={ __( 'Spinner', 'analytics-test' ) } />
-			<Woo.H>I am a spinner!</Woo.H>
-			<Woo.Spinner />
-		</Woo.Section>
-
-		<Woo.Section component="article">
-			<Woo.SectionHeader title={ __( 'Datepicker', 'analytics-test' ) } />
-			<Woo.DatePicker
-				text={ __( 'I am a datepicker!', 'analytics-test' ) }
-				dateFormat={ 'MM/DD/YYYY' }
-			/>
-		</Woo.Section>
-	</Fragment>
-);
-
-addFilter( 'woocommerce_admin_pages_list', 'analytics-test', ( pages ) => {
-	pages.push( {
-		container: MyExamplePage,
-		path: '/analytics-test',
-		breadcrumbs: [ __( 'Analytics Test 2', 'analytics-test' ) ],
-		navArgs: {
-			id: 'analytics_test_2',
+const data = [
+	{
+		date: '2018-05-30T00:00:00',
+		Hoodie: {
+			label: 'Hoodie',
+			value: 21599,
 		},
-	} );
+		Sunglasses: {
+			label: 'Sunglasses',
+			value: 38537,
+		},
+		Cap: {
+			label: 'Cap',
+			value: 106010,
+		},
+		Tshirt: {
+			label: 'Tshirt',
+			value: 26784,
+		},
+		Jeans: {
+			label: 'Jeans',
+			value: 35645,
+		},
+		Headphones: {
+			label: 'Headphones',
+			value: 19500,
+		},
+		Lamp: {
+			label: 'Lamp',
+			value: 21599,
+		},
+		Socks: {
+			label: 'Socks',
+			value: 32572,
+		},
+		Mug: {
+			label: 'Mug',
+			value: 10991,
+		},
+		Case: {
+			label: 'Case',
+			value: 35537,
+		},
+	},
+	{
+		date: '2018-05-31T00:00:00',
+		Hoodie: {
+			label: 'Hoodie',
+			value: 14205,
+		},
+		Sunglasses: {
+			label: 'Sunglasses',
+			value: 24721,
+		},
+		Cap: {
+			label: 'Cap',
+			value: 70131,
+		},
+		Tshirt: {
+			label: 'Tshirt',
+			value: 16784,
+		},
+		Jeans: {
+			label: 'Jeans',
+			value: 25645,
+		},
+		Headphones: {
+			label: 'Headphones',
+			value: 39500,
+		},
+		Lamp: {
+			label: 'Lamp',
+			value: 15599,
+		},
+		Socks: {
+			label: 'Socks',
+			value: 27572,
+		},
+		Mug: {
+			label: 'Mug',
+			value: 110991,
+		},
+		Case: {
+			label: 'Case',
+			value: 21537,
+		},
+	},
+	{
+		date: '2018-06-01T00:00:00',
+		Hoodie: {
+			label: 'Hoodie',
+			value: 10581,
+		},
+		Sunglasses: {
+			label: 'Sunglasses',
+			value: 19991,
+		},
+		Cap: {
+			label: 'Cap',
+			value: 53552,
+		},
+		Tshirt: {
+			label: 'Tshirt',
+			value: 41784,
+		},
+		Jeans: {
+			label: 'Jeans',
+			value: 17645,
+		},
+		Headphones: {
+			label: 'Headphones',
+			value: 22500,
+		},
+		Lamp: {
+			label: 'Lamp',
+			value: 25599,
+		},
+		Socks: {
+			label: 'Socks',
+			value: 14572,
+		},
+		Mug: {
+			label: 'Mug',
+			value: 20991,
+		},
+		Case: {
+			label: 'Case',
+			value: 11537,
+		},
+	},
+	{
+		date: '2018-06-02T00:00:00',
+		Hoodie: {
+			label: 'Hoodie',
+			value: 9250,
+		},
+		Sunglasses: {
+			label: 'Sunglasses',
+			value: 16072,
+		},
+		Cap: {
+			label: 'Cap',
+			value: 47821,
+		},
+		Tshirt: {
+			label: 'Tshirt',
+			value: 18784,
+		},
+		Jeans: {
+			label: 'Jeans',
+			value: 29645,
+		},
+		Headphones: {
+			label: 'Headphones',
+			value: 24500,
+		},
+		Lamp: {
+			label: 'Lamp',
+			value: 18599,
+		},
+		Socks: {
+			label: 'Socks',
+			value: 23572,
+		},
+		Mug: {
+			label: 'Mug',
+			value: 20991,
+		},
+		Case: {
+			label: 'Case',
+			value: 16537,
+		},
+	},
+];
 
-	return pages;
-} );
+addFilter(
+	'woocommerce_admin_reports_list',
+	'analytics/order-attribution',
+	( reports ) => {
+		reports.push( {
+			report: 'order-attribution',
+			title: __( 'Order Attribution', 'woocommerce' ),
+			component: () => (
+				<Chart data={ data } legendPosition="side" chartType="bar" />
+			),
+			navArgs: {
+				id: 'woocommerce-analytics-order-attribution',
+			},
+		} );
+
+		return reports;
+	}
+);

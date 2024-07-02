@@ -1,9 +1,9 @@
 <?php
 
-namespace AnalyticsTest_2\Admin;
+namespace AnalyticsTest\Admin;
 
 /**
- * AnalyticsTest_2 Setup Class
+ * AnalyticsTest Setup Class
  */
 class Setup {
 	/**
@@ -13,7 +13,7 @@ class Setup {
 	 */
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
-		add_action( 'admin_menu', array( $this, 'register_page' ) );
+		add_action( 'woocommerce_analytics_report_menu_items', array( $this, 'register_page' ) );
 	}
 
 	/**
@@ -63,19 +63,13 @@ class Setup {
 	 *
 	 * @since 1.0.0
 	 */
-	public function register_page() {
-
-		if ( ! function_exists( 'wc_admin_register_page' ) ) {
-			return;
-		}
-
-		wc_admin_register_page(
-			array(
-				'id'     => 'analytics_test_2-example-page',
-				'title'  => __( 'Analytics Test 2', 'analytics_test_2' ),
-				'parent' => 'woocommerce',
-				'path'   => '/analytics-test',
-			)
+	public function register_page( $report_pages ) {
+		$report_pages[] = array(
+			'id'     => 'order-attribution',
+			'title'  => __( 'Order Attribution', 'magnolia' ),
+			'parent' => 'woocommerce-analytics',
+			'path'   => '/analytics/order-attribution',
 		);
+		return $report_pages;
 	}
 }

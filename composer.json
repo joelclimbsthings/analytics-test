@@ -3,7 +3,7 @@
 	"description": "WooCommerce plugin",
 	"autoload": {
 		"psr-4": {
-			"AnalyticsTest_2\\": "includes/"
+			"AnalyticsTest\\": "includes/"
 		}
 	},
 	"require-dev": {
